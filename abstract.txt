@@ -1,3 +1,6 @@
 Final Project Abstract
+ 
+
+This project will be a web-based calculator application that includes capabilities to do standard math functions and conversion methods for length, temperature, and weight.  The purpose of the calculator is to provide a simple, functional, and visually pleasing tool for everyday calculations. The calculator will include standard calculation functions such as addition, subtraction, multiplication, and division, as well as a set of unit conversion functions, such as kilometers to miles and pounds to kilograms.  The tools that will be utilized include HTML and CSS to structure the user interface, JavaScript for core calculation and conversion logic, and the React.js framework for a more interactive user interface experience. The two different methods of math equations and conversions will be coded in separate modules adhering to the OOP principles. Multiple designs will also be utilized in the project including the strategy pattern, factory pattern, and the singleton pattern. All of these tools and designs put together will create an everyday calculator application that provides the user with a one stop destination for all their conversion and mathematical needs.  
 
 <insert, no more than 200 words>
