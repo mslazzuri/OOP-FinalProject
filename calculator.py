@@ -4,17 +4,31 @@ from tkinter import Tk, Entry, Button, StringVar, Frame
 # ------------------ Base Logic ------------------
 
 class CalculatorBase:
-    """Handles the core mathematical operations of the calculator."""
+    """
+    Handles the core mathematical operations of the calculator.
+    
+    This class contains methods to append input values, clear the entry, 
+    and evaluate mathematical expressions.
+    """
     def __init__(self):
+        """Initialize the calculator with an empty entry value."""
         self.entry_value = ''
 
     def append(self, value):
+        """Append a value to the current entry."""
         self.entry_value += str(value)
 
     def clear(self):
+        """Clear the current entry."""
         self.entry_value = ''
 
     def solve(self):
+        """
+        Evaluate the current mathematical expression.
+
+        Returns:
+            str: The result of the evaluation or 'Error' if invalid.
+        """
         try:
             return eval(self.entry_value)
         except Exception:
@@ -23,50 +37,99 @@ class CalculatorBase:
 
 # ------------------ Conversion Logic ------------------
 
+class ConversionStrategy:
+    """
+    Defines a common interface for all conversion strategies.
+    """
+    def convert(self, value):
+        """
+        Perform the conversion on the input value.
+
+        Args:
+            value (float): The value to convert.
+
+        Returns:
+            float: The converted value.
+        """
+        raise NotImplementedError("Subclasses must implement this method.")
+
+
+class MilesToKmStrategy(ConversionStrategy):
+    """Strategy for converting miles to kilometers."""
+    def convert(self, value):
+        return value * 1.60934
+
+
+class KmToMilesStrategy(ConversionStrategy):
+    """Strategy for converting kilometers to miles."""
+    def convert(self, value):
+        return value / 1.60934
+
+
+class CelsiusToFahrenheitStrategy(ConversionStrategy):
+    """Strategy for converting Celsius to Fahrenheit."""
+    def convert(self, value):
+        return (value * 9 / 5) + 32
+
+
+class FahrenheitToCelsiusStrategy(ConversionStrategy):
+    """Strategy for converting Fahrenheit to Celsius."""
+    def convert(self, value):
+        return (value - 32) * 5 / 9
+
+
 class ConversionContext:
-    """Manages the selection and execution of a conversion strategy."""
+    """
+    Manages the current conversion strategy and executes it.
+
+    Implements the **Strategy Pattern** by dynamically assigning
+    the conversion strategy at runtime.
+    """
     def __init__(self):
-        self.strategy_map = {
-            "Mi to Km": self.miles_to_km,
-            "Km to Mi": self.km_to_miles,
-            "C to F": self.celsius_to_fahrenheit,
-            "F to C": self.fahrenheit_to_celsius,
-        }
+        self.strategy = None  # Current strategy
 
-    @staticmethod
-    def miles_to_km(val):
-        return val * 1.60934
+    def set_strategy(self, strategy):
+        """
+        Set the conversion strategy.
 
-    @staticmethod
-    def km_to_miles(val):
-        return val / 1.60934
+        Args:
+            strategy (ConversionStrategy): The strategy to set.
+        """
+        self.strategy = strategy
 
-    @staticmethod
-    def celsius_to_fahrenheit(val):
-        return (val * 9 / 5) + 32
+    def execute_conversion(self, value):
+        """
+        Execute the current strategy's conversion.
 
-    @staticmethod
-    def fahrenheit_to_celsius(val):
-        return (val - 32) * 5 / 9
+        Args:
+            value (float): The value to convert.
 
-    def execute_conversion(self, operation, val):
-        strategy = self.strategy_map.get(operation)
-        if not strategy:
-            raise ValueError(f"Invalid operation: {operation}")
-        return strategy(val)
+        Returns:
+            float: The converted value.
+        """
+        if not self.strategy:
+            raise ValueError("No conversion strategy set.")
+        return self.strategy.convert(value)
 
 
 # ------------------ Modes for Buttons ------------------
 
 class CalculatorMode:
-    """Defines a common interface for calculator modes."""
+    """
+    Defines a common interface for calculator modes.
+
+    Implements the **State Pattern**, where each mode (Standard, Convert)
+    represents a different state with its own behavior for button creation.
+    """
     def create_buttons(self):
+        """Create the button layout for the mode."""
         raise NotImplementedError("Subclasses must implement this method.")
 
 
 class StandardMode(CalculatorMode):
     """Defines buttons for the standard calculator mode."""
     def create_buttons(self):
+        """Return the button layout for the standard mode."""
         return [
             ('(', 0, 0), (')', 0, 1), ('%', 0, 2), ('/', 0, 3),
             ('7', 1, 0), ('8', 1, 1), ('9', 1, 2), ('*', 1, 3),
@@ -79,6 +142,7 @@ class StandardMode(CalculatorMode):
 class ConvertMode(CalculatorMode):
     """Defines buttons for the conversion calculator mode."""
     def create_buttons(self):
+        """Return the button layout for the convert mode."""
         return [
             ('7', 1, 0), ('8', 1, 1), ('9', 1, 2),
             ('4', 2, 0), ('5', 2, 1), ('6', 2, 2),
@@ -92,40 +156,66 @@ class ConvertMode(CalculatorMode):
 # ------------------ Mediator ------------------
 
 class AppMediator:
-    """Central mediator for managing the application state and communication."""
+    """
+    Central mediator for managing the application state and communication.
+
+    Implements the **Mediator Pattern** to reduce coupling between components.
+    """
     def __init__(self, master):
+        """
+        Initialize the mediator and link all components.
+
+        Args:
+            master (Tk): The root tkinter window.
+        """
         self.calculator = CalculatorBase()
         self.conversion_context = ConversionContext()
         self.mode = StandardMode()  # Default mode
         self.display = Display(master, self)
         self.button_manager = ButtonManager(master, self)
 
-    # Mode management
     def set_standard_mode(self):
+        """Set the calculator to Standard mode."""
         self.mode = StandardMode()
         self.button_manager.update_buttons()
 
     def set_convert_mode(self):
+        """Set the calculator to Convert mode."""
         self.mode = ConvertMode()
         self.button_manager.update_buttons()
 
-    # Calculator operations
     def handle_clear(self):
+        """Clear the calculator display."""
         self.calculator.clear()
         self.display.update_display("")
 
     def handle_equal(self):
+        """Evaluate and display the result of the current equation."""
         result = self.calculator.solve()
         self.display.update_display(result)
 
     def handle_append(self, value):
+        """Append a value to the calculator's entry."""
         self.calculator.append(value)
         self.display.update_display(self.calculator.entry_value)
 
     def handle_conversion(self, operation):
+        """
+        Execute a conversion operation using the appropriate strategy.
+
+        Args:
+            operation (str): The name of the conversion operation.
+        """
         try:
             value = float(self.calculator.entry_value)
-            result = self.conversion_context.execute_conversion(operation, value)
+            strategy_map = {
+                "Mi to Km": MilesToKmStrategy(),
+                "Km to Mi": KmToMilesStrategy(),
+                "C to F": CelsiusToFahrenheitStrategy(),
+                "F to C": FahrenheitToCelsiusStrategy(),
+            }
+            self.conversion_context.set_strategy(strategy_map[operation])
+            result = self.conversion_context.execute_conversion(value)
             self.display.update_display(f"{result:.2f}")
         except ValueError:
             self.display.update_display("Error")
@@ -136,19 +226,28 @@ class AppMediator:
 class Display:
     """Handles the display and menu."""
     def __init__(self, master, mediator):
+        """
+        Initialize the display and menu.
+
+        Args:
+            master (Tk): The root tkinter window.
+            mediator (AppMediator): The central mediator instance.
+        """
         self.mediator = mediator
-        self.equation = StringVar()
+        self.equation = StringVar(value="")  # Start with an empty display
         self.create_display(master)
         self.create_menu(master)
         self.configure_window(master)
 
     def configure_window(self, master):
+        """Configure the main tkinter window."""
         master.title("Calculator")
         master.geometry('380x570+0+0')
         master.config(bg='#484F2B')
         master.resizable(False, False)
 
     def create_display(self, master):
+        """Create the display entry widget."""
         self.entry = Entry(
             master, width=17, bg='#AEBD93', font=('Helvetica Bold', 28),
             relief='flat', textvariable=self.equation
@@ -156,6 +255,7 @@ class Display:
         self.entry.place(x=10, y=50, width=360, height=70)
 
     def create_menu(self, master):
+        """Create the menu for switching modes."""
         menu = Frame(master, bg='#484F2B')
         menu.place(x=10, y=10, width=380, height=30)
 
@@ -167,15 +267,23 @@ class Display:
         Button(
             menu, text="Convert", bg='#7A8450', fg='white',
             command=self.mediator.set_convert_mode, relief='flat'
-        ).pack(side='left', padx=5)
+        ).place(x=275)
 
     def update_display(self, value):
+        """Update the display with a given value."""
         self.equation.set(value)
 
 
 class ButtonManager:
     """Handles button creation and management."""
     def __init__(self, master, mediator):
+        """
+        Initialize the button manager.
+
+        Args:
+            master (Tk): The root tkinter window.
+            mediator (AppMediator): The central mediator instance.
+        """
         self.mediator = mediator
         self.button_frame = Frame(master, bg='#484F2B')
         self.button_frame.place(x=10, y=125, width=360, height=440)
