@@ -31,16 +31,16 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 --count --show-source --statistics calculator
+        flake8 --count --show-source --statistics calculator.py
 
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         # flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Check types with mypy
       run: |
-        mypy --strict --allow-untyped-decorators --ignore-missing-imports calculator
+        mypy --strict --allow-untyped-decorators --ignore-missing-imports calculator.py
 
 
     - name: Test with pytest
       run: |
-        pytest test_calculator
+        pytest test_calculator.py
         
