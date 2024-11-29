@@ -42,5 +42,5 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest --verbose calculator/tests
+        pytest test_calculator
         
