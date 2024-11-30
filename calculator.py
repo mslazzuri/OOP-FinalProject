@@ -84,6 +84,31 @@ class FahrenheitToCelsiusStrategy(ConversionStrategy):
 
     def convert(self, value: float) -> float:
         return (value - 32) * 5 / 9
+    
+class InchesToCentimeters(ConversionStrategy):
+    """Strategy for converting Inches to Centimeters."""
+
+    def convert(self, value: float) -> float:
+        return value * 2.54
+    
+class CentimetersToInches(ConversionStrategy):
+    """Strategy for converting Centimeters to Inches."""
+
+    def convert(self, value: float) -> float:
+        return value * 0.3937
+    
+class MinutesToSecondsStrategy(ConversionStrategy):
+    """Strategy for converting minutes to seconds."""
+
+    def convert(self, value: float) -> float:
+        return value * 60
+
+
+class SecondsToMinutesStrategy(ConversionStrategy):
+    """Strategy for converting seconds to minutes."""
+
+    def convert(self, value: float) -> float:
+        return value / 60
 
 
 class ConversionContext:
@@ -163,6 +188,8 @@ class ConvertMode(CalculatorMode):
             ('C', 4, 0), ('0', 4, 1), ('.', 4, 2),
             ('Mi to Km', 0, 0), ('Km to Mi', 0, 1),
             ('C to F', 0, 2), ('F to C', 0, 3),
+            ('In to Cm', 1, 3), ('Cm to In', 2, 3),
+            ('Min to Sec', 3, 3), ('Sec to Min', 4, 3)
         ]
 
 
@@ -221,6 +248,10 @@ class AppMediator:
                 "Km to Mi": KmToMilesStrategy(),
                 "C to F": CelsiusToFahrenheitStrategy(),
                 "F to C": FahrenheitToCelsiusStrategy(),
+                "In to Cm": InchesToCentimeters(),
+                "Cm to In": CentimetersToInches(),
+                "Min to Sec": MinutesToSecondsStrategy(),
+                "Sec to Min": SecondsToMinutesStrategy() 
             }
             self.conversion_context.set_strategy(strategy_map[operation])
             result = self.conversion_context.execute_conversion(value)
