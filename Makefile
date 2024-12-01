@@ -2,7 +2,6 @@
 PLANTUML = java -jar ~/plantuml.jar
 DOCS = docs
 UML_DIR = uml
-COVERAGE = python -m pytest
 
 .PHONY: all
 all: check-style check-type test create-docs clean
@@ -41,6 +40,10 @@ create-uml:
 	@echo "Generating UML diagrams..."
 	$(PLANTUML) $(UML_DIR)/classes.plantuml
 	@echo "UML diagrams created and saved in uml folder"
+
+.PHONY: run-test-coverage
+run-test-coverage:
+	@pytest --cov=calculator --cov-report=html:./htmlcov --cov-report=term-missing
 
 .PHONY: clean
 clean:

@@ -86,6 +86,34 @@ class FahrenheitToCelsiusStrategy(ConversionStrategy):
         return (value - 32) * 5 / 9
 
 
+class InchesToCentimeters(ConversionStrategy):
+    """Strategy for converting Inches to Centimeters."""
+
+    def convert(self, value: float) -> float:
+        return value * 2.54
+
+
+class CentimetersToInches(ConversionStrategy):
+    """Strategy for converting Centimeters to Inches."""
+
+    def convert(self, value: float) -> float:
+        return value * 0.3937
+
+
+class MinutesToSecondsStrategy(ConversionStrategy):
+    """Strategy for converting minutes to seconds."""
+
+    def convert(self, value: float) -> float:
+        return value * 60
+
+
+class SecondsToMinutesStrategy(ConversionStrategy):
+    """Strategy for converting seconds to minutes."""
+
+    def convert(self, value: float) -> float:
+        return value / 60
+
+
 class ConversionContext:
     """
     Manages the current conversion strategy and executes it.
@@ -163,6 +191,8 @@ class ConvertMode(CalculatorMode):
             ('C', 4, 0), ('0', 4, 1), ('.', 4, 2),
             ('Mi to Km', 0, 0), ('Km to Mi', 0, 1),
             ('C to F', 0, 2), ('F to C', 0, 3),
+            ('In to Cm', 1, 3), ('Cm to In', 2, 3),
+            ('Min to Sec', 3, 3), ('Sec to Min', 4, 3)
         ]
 
 
@@ -172,7 +202,8 @@ class AppMediator:
     """
     Central mediator for managing the application state and communication.
 
-    Implements the **Mediator Pattern** to reduce coupling between components.
+    Implements the **Mediator Pattern** to reduce coupling and circular
+    dependency between components.
     """
 
     def __init__(self, master: Tk) -> None:
@@ -221,10 +252,14 @@ class AppMediator:
                 "Km to Mi": KmToMilesStrategy(),
                 "C to F": CelsiusToFahrenheitStrategy(),
                 "F to C": FahrenheitToCelsiusStrategy(),
+                "In to Cm": InchesToCentimeters(),
+                "Cm to In": CentimetersToInches(),
+                "Min to Sec": MinutesToSecondsStrategy(),
+                "Sec to Min": SecondsToMinutesStrategy()
             }
             self.conversion_context.set_strategy(strategy_map[operation])
             result = self.conversion_context.execute_conversion(value)
-            self.display.update_display(f"{result:.2f}")
+            self.display.update_display(result)
         except ValueError:
             self.display.update_display("Error")
 
@@ -273,7 +308,10 @@ class Display:
 
     def update_display(self, value: Union[str, float]) -> None:
         """Update the display with a given value."""
-        self.equation.set(str(value))
+        if isinstance(value, (float, int)):
+            self.equation.set(f"{value:.3f}")
+        else:
+            self.equation.set(str(value))
 
 
 class ButtonManager:
