@@ -1,15 +1,24 @@
 import unittest
 from unittest.mock import Mock, patch
-import tkinter as tk
+from tkinter import Tk as tk, StringVar
 from calculator import (
     CalculatorBase,
     ConversionContext,
+    ConversionStrategy,
     MilesToKmStrategy,
     KmToMilesStrategy,
     CelsiusToFahrenheitStrategy,
     FahrenheitToCelsiusStrategy,
+    InchesToCentimetersStrategy,
+    CentimetersToInchesStrategy,
+    MinutesToSecondsStrategy,
+    SecondsToMinutesStrategy,
+    CalculatorMode,
     StandardMode,
     ConvertMode,
+    AppMediator,
+    Display,
+    ButtonManager
 )
 from hypothesis import given, strategies as st
 
@@ -49,6 +58,13 @@ class TestCalculatorBase(unittest.TestCase):
         self.calculator.entry_value = expression
         result = self.calculator.solve()
         self.assertTrue(isinstance(result, (str, int, float)))
+
+
+class TestConversionStrategy(unittest.TestCase):
+    def test_convert_not_implemented(self):
+        strategy = ConversionStrategy()
+        with self.assertRaises(NotImplementedError):
+            strategy.convert(5.6)
 
 
 class TestConversionStrategies(unittest.TestCase):
@@ -92,6 +108,34 @@ class TestConversionStrategies(unittest.TestCase):
         result = strategy.convert(value)
         self.assertAlmostEqual(result, value / 1.60934)
 
+    @given(st.floats(min_value=-1e6, max_value=1e6))
+    def test_in_to_cm(self, value):
+        """Property-based test for kilometers to miles."""
+        strategy = InchesToCentimetersStrategy()
+        result = strategy.convert(value)
+        self.assertAlmostEqual(result, value * 2.54)
+
+    @given(st.floats(min_value=-1e6, max_value=1e6))
+    def test_cm_to_in(self, value):
+        """Property-based test for kilometers to miles."""
+        strategy = CentimetersToInchesStrategy()
+        result = strategy.convert(value)
+        self.assertAlmostEqual(result, value * 0.3937)
+
+    @given(st.floats(min_value=-1e6, max_value=1e6))
+    def test_min_to_sec(self, value):
+        """Property-based test for kilometers to miles."""
+        strategy = MinutesToSecondsStrategy()
+        result = strategy.convert(value)
+        self.assertAlmostEqual(result, value * 60)
+
+    @given(st.floats(min_value=-1e6, max_value=1e6))
+    def test_sec_to_min(self, value):
+        """Property-based test for kilometers to miles."""
+        strategy = SecondsToMinutesStrategy()
+        result = strategy.convert(value)
+        self.assertAlmostEqual(result, value / 60)
+
 
 class TestConversionContext(unittest.TestCase):
     """Tests for the ConversionContext class."""
@@ -130,6 +174,141 @@ class TestCalculatorModes(unittest.TestCase):
         self.assertIn(('Mi to Km', 0, 0), buttons)
         self.assertIn(('F to C', 0, 3), buttons)
         self.assertNotIn(('=', 4, 3), buttons)
+
+
+class TestCalculatorMode(unittest.TestCase):
+    def test_create_buttons_not_implemented(self):
+        mode = CalculatorMode()
+        with self.assertRaises(NotImplementedError):
+            mode.create_buttons()
+
+
+class TestAppMediator(unittest.TestCase):
+    """Tests for the App Mediator class."""
+    def setUp(self):
+        """Set up the AppMediator with a real Tk instance."""
+        self.master = tk()  # Create a real Tk instance
+        self.mediator = AppMediator(self.master)
+
+        # Replace display and button_manager with mocks
+        self.mediator.display = Mock()
+        self.mediator.button_manager = Mock()
+
+    def tearDown(self):
+        self.master.destroy()
+
+    def test_set_standard_mode(self):
+        self.mediator.set_standard_mode()
+        self.assertIsInstance(self.mediator.mode, StandardMode)
+        self.assertEqual(self.mediator.button_manager.update_buttons.call_count, 1)
+
+    def test_set_convert_mode(self):
+        self.mediator.set_convert_mode()
+        self.assertIsInstance(self.mediator.mode, ConvertMode)
+        self.assertEqual(self.mediator.button_manager.update_buttons.call_count, 1)
+
+    def test_handle_clear(self):
+        with patch.object(self.mediator.calculator, 'clear') as mock_clear:
+            self.mediator.handle_clear()
+            mock_clear.assert_called_once()
+            self.mediator.display.update_display.assert_called_once_with("")
+
+    def test_handle_equal(self):
+        with patch.object(self.mediator.calculator, 'solve', return_value=42):
+            self.mediator.handle_equal()
+            self.assertEqual(self.mediator.calculator.solve.call_count, 1)
+            self.mediator.display.update_display.assert_called_once_with(42)
+
+    def test_handle_append(self):
+        with patch.object(self.mediator.calculator, 'append') as mock_append:
+            self.mediator.handle_append("5")
+            mock_append.assert_called_once_with("5")
+            self.mediator.display.update_display.assert_called_once_with(self.mediator.calculator.entry_value)
+
+    def test_handle_conversion(self):
+        self.mediator.calculator.entry_value = "10"
+        with patch.object(self.mediator.conversion_context, 'set_strategy') as mock_set_strategy, \
+             patch.object(self.mediator.conversion_context, 'execute_conversion', return_value=16.0934) as mock_execute_conversion:
+            self.mediator.handle_conversion("Mi to Km")
+            self.assertEqual(mock_set_strategy.call_count, 1)
+            self.assertEqual(mock_execute_conversion.call_count, 1)
+            self.mediator.display.update_display.assert_called_once_with(16.0934)
+
+    def test_handle_conversion_invalid_value(self):
+        self.mediator.calculator.entry_value = "invalid"
+        self.mediator.handle_conversion("Mi to Km")
+        self.mediator.display.update_display.assert_called_once_with("Error")
+
+
+class TestDisplay(unittest.TestCase):
+    """Tests for Display class methods that haven't been covered"""
+
+    def setUp(self):
+        self.master = tk()
+        self.mock_mediator = Mock()
+        self.display = Display(self.master, self.mock_mediator)
+        self.display.equation = StringVar()
+
+    @given(st.floats(allow_infinity=False, allow_nan=False))
+    def test_update_display_with_float(self, value):
+        self.display.update_display(value)
+        self.assertEqual(self.display.equation.get(), f"{value:.3f}")
+
+    @given(st.integers())
+    def test_update_display_with_int(self, value):
+        self.display.update_display(value)
+        self.assertEqual(self.display.equation.get(), f"{value:.3f}")
+
+    @given(st.text())
+    def test_update_display_with_str(self, value):
+        self.display.update_display(value)
+        self.assertEqual(self.display.equation.get(), value)
+
+    def test_update_display_with_edge_case_values(self):
+        self.display.update_display("")  # Empty string
+        self.assertEqual(self.display.equation.get(), "")
+        
+        self.display.update_display(0)  # Zero
+        self.assertEqual(self.display.equation.get(), "0.000")
+
+
+class TestButtonManager(unittest.TestCase):
+    """Tests for the ButtonManager class."""
+
+    def setUp(self):
+        self.master = tk()
+        self.mock_mediator = Mock()
+        self.mock_mediator.mode = Mock()
+        self.mock_mediator.mode.create_buttons.return_value = [
+            ("Button1", 0, 0),
+            ("Button2", 1, 1),
+        ]
+        self.button_manager = ButtonManager(self.master, self.mock_mediator)
+
+    def tearDown(self):
+        self.master.destroy()
+
+    @patch("calculator.Button")
+    def test_create_standard_button(self, mock_button):
+        self.button_manager.create_standard_button("=", 1, 2)
+
+        mock_button.assert_called_once_with(
+            self.button_manager.button_frame, width=7, height=4, text="=",
+            relief='flat', bg='#7A8450', activebackground='#AEBD93', fg='white',
+            bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
+            command=unittest.mock.ANY
+        )
+
+    @patch("calculator.Button")
+    def test_create_conversion_button(self, mock_button):
+        self.button_manager.create_conversion_button("Mi to Km", 1, 3)
+
+        mock_button.assert_called_once_with(
+            self.button_manager.button_frame, width=7, height=4, text="Mi to Km",
+            relief='flat', bg='white', activebackground='white', fg='black',
+            bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
+            command=unittest.mock.ANY
+        )
 
 
 if __name__ == "__main__":
