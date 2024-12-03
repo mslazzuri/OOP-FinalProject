@@ -367,7 +367,7 @@ class ButtonManager:
 
 # ------------------ Main Application ------------------
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     root = Tk()
     mediator = AppMediator(root)
     root.mainloop()

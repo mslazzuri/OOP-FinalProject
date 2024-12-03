@@ -280,35 +280,96 @@ class TestButtonManager(unittest.TestCase):
         self.mock_mediator = Mock()
         self.mock_mediator.mode = Mock()
         self.mock_mediator.mode.create_buttons.return_value = [
-            ("Button1", 0, 0),
-            ("Button2", 1, 1),
+            ("C", 0, 0),
+            ("=", 1, 1),
+            ("5", 2, 2),
+            ("Mi to Km", 3, 3),
         ]
         self.button_manager = ButtonManager(self.master, self.mock_mediator)
 
     def tearDown(self):
         self.master.destroy()
-
-    @patch("calculator.Button")
-    def test_create_standard_button(self, mock_button):
-        self.button_manager.create_standard_button("=", 1, 2)
-
-        mock_button.assert_called_once_with(
-            self.button_manager.button_frame, width=7, height=4, text="=",
-            relief='flat', bg='#7A8450', activebackground='#AEBD93', fg='white',
-            bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
-            command=unittest.mock.ANY
+        
+    def test_update_buttons_clears_existing_widgets(self):
+        """Ensure update_buttons destroys all existing widgets."""
+        # Mock existing widgets in the button_frame
+        mock_widget1 = Mock()
+        mock_widget2 = Mock()
+        self.button_manager.button_frame.winfo_children = Mock(
+            return_value=[mock_widget1, mock_widget2]
         )
 
-    @patch("calculator.Button")
-    def test_create_conversion_button(self, mock_button):
-        self.button_manager.create_conversion_button("Mi to Km", 1, 3)
+        # Call update_buttons
+        self.button_manager.update_buttons()
 
-        mock_button.assert_called_once_with(
-            self.button_manager.button_frame, width=7, height=4, text="Mi to Km",
-            relief='flat', bg='white', activebackground='white', fg='black',
-            bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
-            command=unittest.mock.ANY
-        )
+        # Ensure destroy was called for each widget
+        mock_widget1.destroy.assert_called_once()
+        mock_widget2.destroy.assert_called_once()
+
+    @patch("calculator.Button")
+    def test_create_standard_button_handles_clear(self, mock_button):
+        """Test 'C' button calls mediator's handle_clear."""
+        with patch.object(self.mock_mediator, "handle_clear") as mock_handle_clear:
+            self.button_manager.create_standard_button("C", 0, 0)
+            mock_button.assert_called_once_with(
+                self.button_manager.button_frame, width=7, height=4, text="C",
+                relief='flat', bg='#7A8450', activebackground='#AEBD93', fg='white',
+                bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
+                command=unittest.mock.ANY
+            )
+            # Simulate button click
+            command = mock_button.call_args[1]["command"]
+            command()  # Execute the button command
+            mock_handle_clear.assert_called_once()
+
+    @patch("calculator.Button")
+    def test_create_standard_button_handles_equal(self, mock_button):
+        """Test '=' button calls mediator's handle_equal."""
+        with patch.object(self.mock_mediator, "handle_equal") as mock_handle_equal:
+            self.button_manager.create_standard_button("=", 1, 1)
+            mock_button.assert_called_once_with(
+                self.button_manager.button_frame, width=7, height=4, text="=",
+                relief='flat', bg='#7A8450', activebackground='#AEBD93', fg='white',
+                bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
+                command=unittest.mock.ANY
+            )
+            # Simulate button click
+            command = mock_button.call_args[1]["command"]
+            command()  # Execute the button command
+            mock_handle_equal.assert_called_once()
+
+    @patch("calculator.Button")
+    def test_create_standard_button_handles_append(self, mock_button):
+        """Test a number button calls mediator's handle_append."""
+        with patch.object(self.mock_mediator, "handle_append") as mock_handle_append:
+            self.button_manager.create_standard_button("5", 2, 2)
+            mock_button.assert_called_once_with(
+                self.button_manager.button_frame, width=7, height=4, text="5",
+                relief='flat', bg='#7A8450', activebackground='#AEBD93', fg='white',
+                bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
+                command=unittest.mock.ANY
+            )
+            # Simulate button click
+            command = mock_button.call_args[1]["command"]
+            command()  # Execute the button command
+            mock_handle_append.assert_called_once_with("5")
+
+    @patch("calculator.Button")
+    def test_create_conversion_button_handles_conversion(self, mock_button):
+        """Test conversion button calls mediator's handle_conversion."""
+        with patch.object(self.mock_mediator, "handle_conversion") as mock_handle_conversion:
+            self.button_manager.create_conversion_button("Mi to Km", 3, 3)
+            mock_button.assert_called_once_with(
+                self.button_manager.button_frame, width=7, height=4, text="Mi to Km",
+                relief='flat', bg='white', activebackground='white', fg='black',
+                bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
+                command=unittest.mock.ANY
+            )
+            # Simulate button click
+            command = mock_button.call_args[1]["command"]
+            command()  # Execute the button command
+            mock_handle_conversion.assert_called_once_with("Mi to Km")
+
 
 
 if __name__ == "__main__":
