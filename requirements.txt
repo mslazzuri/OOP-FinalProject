@@ -1,4 +1,5 @@
 pytest
+tk
 pytest-cov
 ipykernel
 jupyterlab

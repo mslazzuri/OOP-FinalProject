@@ -40,5 +40,5 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest test_calculator.py
+        pytest test_calculator.py --verbose
         
