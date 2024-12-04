@@ -365,9 +365,3 @@ class ButtonManager:
         ).grid(column=col, row=row, padx=4, pady=4)
 
 
-# ------------------ Main Application ------------------
-
-if __name__ == "__main__":  # pragma: no cover
-    root = Tk()
-    mediator = AppMediator(root)
-    root.mainloop()
