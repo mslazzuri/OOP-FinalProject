@@ -364,7 +364,7 @@ class ButtonManager:
 
         Button(
             self.button_frame, width=7, height=4, text=text, relief='flat',
-            bg='white', activebackground='white', fg='black',
-            bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
-            command=handle_conversion
+            bg='#AEBD93', activebackground='#7A8450', fg='black',
+            activeforeground='white', bd=0, highlightbackground='white',
+            highlightcolor='#7A8450', command=handle_conversion
         ).grid(column=col, row=row, padx=4, pady=4)

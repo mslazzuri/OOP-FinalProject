@@ -36,3 +36,12 @@ A python GUI calculator application that supports standard mathematical operatio
     make run
     ```
 
+## Screenshots
+### **Calculator Standard Mode:**
+<img src="screenshots/standard_mode.png" alt="Standard Mode Screenshot" width="250">
+
+
+
+
+### **Calculator Convert Mode:**
+<img src="screenshots/convert_mode.png" alt="Convert Mode Screenshot" width="250">
