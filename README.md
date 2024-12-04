@@ -33,7 +33,7 @@ A python GUI calculator application that supports standard mathematical operatio
 
 **or for checks and tests:**
     ```
-    make run
+    make all
     ```
 
 ## Screenshots
