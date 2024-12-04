@@ -90,19 +90,19 @@
 
             </li>
             <li>
-                    <a class="class" href="#InchesToCentimeters">InchesToCentimeters</a>
+                    <a class="class" href="#InchesToCentimetersStrategy">InchesToCentimetersStrategy</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#InchesToCentimeters.convert">convert</a>
+                                <a class="function" href="#InchesToCentimetersStrategy.convert">convert</a>
                         </li>
                 </ul>
 
             </li>
             <li>
-                    <a class="class" href="#CentimetersToInches">CentimetersToInches</a>
+                    <a class="class" href="#CentimetersToInchesStrategy">CentimetersToInchesStrategy</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#CentimetersToInches.convert">convert</a>
+                                <a class="function" href="#CentimetersToInchesStrategy.convert">convert</a>
                         </li>
                 </ul>
 
@@ -369,14 +369,14 @@ calculator    </h1>
 </span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>        <span class="k">return</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">9</span>
 </span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
 </span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="k">class</span> <span class="nc">InchesToCentimeters</span><span class="p">(</span><span class="n">ConversionStrategy</span><span class="p">):</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="k">class</span> <span class="nc">InchesToCentimetersStrategy</span><span class="p">(</span><span class="n">ConversionStrategy</span><span class="p">):</span>
 </span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Strategy for converting Inches to Centimeters.&quot;&quot;&quot;</span>
 </span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
 </span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 </span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">2.54</span>
 </span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>
 </span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="k">class</span> <span class="nc">CentimetersToInches</span><span class="p">(</span><span class="n">ConversionStrategy</span><span class="p">):</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="k">class</span> <span class="nc">CentimetersToInchesStrategy</span><span class="p">(</span><span class="n">ConversionStrategy</span><span class="p">):</span>
 </span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Strategy for converting Centimeters to Inches.&quot;&quot;&quot;</span>
 </span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
 </span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -535,14 +535,14 @@ calculator    </h1>
 </span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a>                <span class="s2">&quot;Km to Mi&quot;</span><span class="p">:</span> <span class="n">KmToMilesStrategy</span><span class="p">(),</span>
 </span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a>                <span class="s2">&quot;C to F&quot;</span><span class="p">:</span> <span class="n">CelsiusToFahrenheitStrategy</span><span class="p">(),</span>
 </span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a>                <span class="s2">&quot;F to C&quot;</span><span class="p">:</span> <span class="n">FahrenheitToCelsiusStrategy</span><span class="p">(),</span>
-</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a>                <span class="s2">&quot;In to Cm&quot;</span><span class="p">:</span> <span class="n">InchesToCentimeters</span><span class="p">(),</span>
-</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a>                <span class="s2">&quot;Cm to In&quot;</span><span class="p">:</span> <span class="n">CentimetersToInches</span><span class="p">(),</span>
+</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a>                <span class="s2">&quot;In to Cm&quot;</span><span class="p">:</span> <span class="n">InchesToCentimetersStrategy</span><span class="p">(),</span>
+</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a>                <span class="s2">&quot;Cm to In&quot;</span><span class="p">:</span> <span class="n">CentimetersToInchesStrategy</span><span class="p">(),</span>
 </span><span id="L-257"><a href="#L-257"><span class="linenos">257</span></a>                <span class="s2">&quot;Min to Sec&quot;</span><span class="p">:</span> <span class="n">MinutesToSecondsStrategy</span><span class="p">(),</span>
 </span><span id="L-258"><a href="#L-258"><span class="linenos">258</span></a>                <span class="s2">&quot;Sec to Min&quot;</span><span class="p">:</span> <span class="n">SecondsToMinutesStrategy</span><span class="p">()</span>
 </span><span id="L-259"><a href="#L-259"><span class="linenos">259</span></a>            <span class="p">}</span>
 </span><span id="L-260"><a href="#L-260"><span class="linenos">260</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">conversion_context</span><span class="o">.</span><span class="n">set_strategy</span><span class="p">(</span><span class="n">strategy_map</span><span class="p">[</span><span class="n">operation</span><span class="p">])</span>
 </span><span id="L-261"><a href="#L-261"><span class="linenos">261</span></a>            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversion_context</span><span class="o">.</span><span class="n">execute_conversion</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </span><span id="L-263"><a href="#L-263"><span class="linenos">263</span></a>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 </span><span id="L-264"><a href="#L-264"><span class="linenos">264</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 </span><span id="L-265"><a href="#L-265"><span class="linenos">265</span></a>
@@ -592,7 +592,7 @@ calculator    </h1>
 </span><span id="L-309"><a href="#L-309"><span class="linenos">309</span></a>    <span class="k">def</span> <span class="nf">update_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="L-310"><a href="#L-310"><span class="linenos">310</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the display with a given value.&quot;&quot;&quot;</span>
 </span><span id="L-311"><a href="#L-311"><span class="linenos">311</span></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-</span><span id="L-312"><a href="#L-312"><span class="linenos">312</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Change the .2f here</span>
+</span><span id="L-312"><a href="#L-312"><span class="linenos">312</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="L-313"><a href="#L-313"><span class="linenos">313</span></a>        <span class="k">else</span><span class="p">:</span>
 </span><span id="L-314"><a href="#L-314"><span class="linenos">314</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 </span><span id="L-315"><a href="#L-315"><span class="linenos">315</span></a>
@@ -646,14 +646,6 @@ calculator    </h1>
 </span><span id="L-363"><a href="#L-363"><span class="linenos">363</span></a>            <span class="n">bd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">highlightbackground</span><span class="o">=</span><span class="s1">&#39;#484F2B&#39;</span><span class="p">,</span> <span class="n">highlightcolor</span><span class="o">=</span><span class="s1">&#39;#7A8450&#39;</span><span class="p">,</span>
 </span><span id="L-364"><a href="#L-364"><span class="linenos">364</span></a>            <span class="n">command</span><span class="o">=</span><span class="n">handle_conversion</span>
 </span><span id="L-365"><a href="#L-365"><span class="linenos">365</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</span><span id="L-366"><a href="#L-366"><span class="linenos">366</span></a>
-</span><span id="L-367"><a href="#L-367"><span class="linenos">367</span></a>
-</span><span id="L-368"><a href="#L-368"><span class="linenos">368</span></a><span class="c1"># ------------------ Main Application ------------------</span>
-</span><span id="L-369"><a href="#L-369"><span class="linenos">369</span></a>
-</span><span id="L-370"><a href="#L-370"><span class="linenos">370</span></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-</span><span id="L-371"><a href="#L-371"><span class="linenos">371</span></a>    <span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
-</span><span id="L-372"><a href="#L-372"><span class="linenos">372</span></a>    <span class="n">mediator</span> <span class="o">=</span> <span class="n">AppMediator</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-</span><span id="L-373"><a href="#L-373"><span class="linenos">373</span></a>    <span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -1098,22 +1090,22 @@ and evaluate mathematical expressions.</p>
 
                             </div>
                 </section>
-                <section id="InchesToCentimeters">
-                            <input id="InchesToCentimeters-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="InchesToCentimetersStrategy">
+                            <input id="InchesToCentimetersStrategy-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
             
     <span class="def">class</span>
-    <span class="name">InchesToCentimeters</span><wbr>(<span class="base"><a href="#ConversionStrategy">ConversionStrategy</a></span>):
+    <span class="name">InchesToCentimetersStrategy</span><wbr>(<span class="base"><a href="#ConversionStrategy">ConversionStrategy</a></span>):
 
-                <label class="view-source-button" for="InchesToCentimeters-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="InchesToCentimetersStrategy-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#InchesToCentimeters"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="InchesToCentimeters-90"><a href="#InchesToCentimeters-90"><span class="linenos">90</span></a><span class="k">class</span> <span class="nc">InchesToCentimeters</span><span class="p">(</span><span class="n">ConversionStrategy</span><span class="p">):</span>
-</span><span id="InchesToCentimeters-91"><a href="#InchesToCentimeters-91"><span class="linenos">91</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Strategy for converting Inches to Centimeters.&quot;&quot;&quot;</span>
-</span><span id="InchesToCentimeters-92"><a href="#InchesToCentimeters-92"><span class="linenos">92</span></a>
-</span><span id="InchesToCentimeters-93"><a href="#InchesToCentimeters-93"><span class="linenos">93</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="InchesToCentimeters-94"><a href="#InchesToCentimeters-94"><span class="linenos">94</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">2.54</span>
+    <a class="headerlink" href="#InchesToCentimetersStrategy"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="InchesToCentimetersStrategy-90"><a href="#InchesToCentimetersStrategy-90"><span class="linenos">90</span></a><span class="k">class</span> <span class="nc">InchesToCentimetersStrategy</span><span class="p">(</span><span class="n">ConversionStrategy</span><span class="p">):</span>
+</span><span id="InchesToCentimetersStrategy-91"><a href="#InchesToCentimetersStrategy-91"><span class="linenos">91</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Strategy for converting Inches to Centimeters.&quot;&quot;&quot;</span>
+</span><span id="InchesToCentimetersStrategy-92"><a href="#InchesToCentimetersStrategy-92"><span class="linenos">92</span></a>
+</span><span id="InchesToCentimetersStrategy-93"><a href="#InchesToCentimetersStrategy-93"><span class="linenos">93</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="InchesToCentimetersStrategy-94"><a href="#InchesToCentimetersStrategy-94"><span class="linenos">94</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">2.54</span>
 </span></pre></div>
 
 
@@ -1121,19 +1113,19 @@ and evaluate mathematical expressions.</p>
 </div>
 
 
-                            <div id="InchesToCentimeters.convert" class="classattr">
-                                        <input id="InchesToCentimeters.convert-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="InchesToCentimetersStrategy.convert" class="classattr">
+                                        <input id="InchesToCentimetersStrategy.convert-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
         <span class="name">convert</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">value</span><span class="p">:</span> <span class="nb">float</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
 
-                <label class="view-source-button" for="InchesToCentimeters.convert-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="InchesToCentimetersStrategy.convert-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#InchesToCentimeters.convert"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="InchesToCentimeters.convert-93"><a href="#InchesToCentimeters.convert-93"><span class="linenos">93</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="InchesToCentimeters.convert-94"><a href="#InchesToCentimeters.convert-94"><span class="linenos">94</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">2.54</span>
+    <a class="headerlink" href="#InchesToCentimetersStrategy.convert"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="InchesToCentimetersStrategy.convert-93"><a href="#InchesToCentimetersStrategy.convert-93"><span class="linenos">93</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="InchesToCentimetersStrategy.convert-94"><a href="#InchesToCentimetersStrategy.convert-94"><span class="linenos">94</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">2.54</span>
 </span></pre></div>
 
 
@@ -1149,22 +1141,22 @@ and evaluate mathematical expressions.</p>
 
                             </div>
                 </section>
-                <section id="CentimetersToInches">
-                            <input id="CentimetersToInches-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="CentimetersToInchesStrategy">
+                            <input id="CentimetersToInchesStrategy-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
             
     <span class="def">class</span>
-    <span class="name">CentimetersToInches</span><wbr>(<span class="base"><a href="#ConversionStrategy">ConversionStrategy</a></span>):
+    <span class="name">CentimetersToInchesStrategy</span><wbr>(<span class="base"><a href="#ConversionStrategy">ConversionStrategy</a></span>):
 
-                <label class="view-source-button" for="CentimetersToInches-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="CentimetersToInchesStrategy-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#CentimetersToInches"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CentimetersToInches-97"><a href="#CentimetersToInches-97"><span class="linenos"> 97</span></a><span class="k">class</span> <span class="nc">CentimetersToInches</span><span class="p">(</span><span class="n">ConversionStrategy</span><span class="p">):</span>
-</span><span id="CentimetersToInches-98"><a href="#CentimetersToInches-98"><span class="linenos"> 98</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Strategy for converting Centimeters to Inches.&quot;&quot;&quot;</span>
-</span><span id="CentimetersToInches-99"><a href="#CentimetersToInches-99"><span class="linenos"> 99</span></a>
-</span><span id="CentimetersToInches-100"><a href="#CentimetersToInches-100"><span class="linenos">100</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="CentimetersToInches-101"><a href="#CentimetersToInches-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">0.3937</span>
+    <a class="headerlink" href="#CentimetersToInchesStrategy"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CentimetersToInchesStrategy-97"><a href="#CentimetersToInchesStrategy-97"><span class="linenos"> 97</span></a><span class="k">class</span> <span class="nc">CentimetersToInchesStrategy</span><span class="p">(</span><span class="n">ConversionStrategy</span><span class="p">):</span>
+</span><span id="CentimetersToInchesStrategy-98"><a href="#CentimetersToInchesStrategy-98"><span class="linenos"> 98</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Strategy for converting Centimeters to Inches.&quot;&quot;&quot;</span>
+</span><span id="CentimetersToInchesStrategy-99"><a href="#CentimetersToInchesStrategy-99"><span class="linenos"> 99</span></a>
+</span><span id="CentimetersToInchesStrategy-100"><a href="#CentimetersToInchesStrategy-100"><span class="linenos">100</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="CentimetersToInchesStrategy-101"><a href="#CentimetersToInchesStrategy-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">0.3937</span>
 </span></pre></div>
 
 
@@ -1172,19 +1164,19 @@ and evaluate mathematical expressions.</p>
 </div>
 
 
-                            <div id="CentimetersToInches.convert" class="classattr">
-                                        <input id="CentimetersToInches.convert-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="CentimetersToInchesStrategy.convert" class="classattr">
+                                        <input id="CentimetersToInchesStrategy.convert-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
         <span class="name">convert</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">value</span><span class="p">:</span> <span class="nb">float</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
 
-                <label class="view-source-button" for="CentimetersToInches.convert-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="CentimetersToInchesStrategy.convert-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#CentimetersToInches.convert"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CentimetersToInches.convert-100"><a href="#CentimetersToInches.convert-100"><span class="linenos">100</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="CentimetersToInches.convert-101"><a href="#CentimetersToInches.convert-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">0.3937</span>
+    <a class="headerlink" href="#CentimetersToInchesStrategy.convert"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CentimetersToInchesStrategy.convert-100"><a href="#CentimetersToInchesStrategy.convert-100"><span class="linenos">100</span></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="CentimetersToInchesStrategy.convert-101"><a href="#CentimetersToInchesStrategy.convert-101"><span class="linenos">101</span></a>        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mf">0.3937</span>
 </span></pre></div>
 
 
@@ -1685,14 +1677,14 @@ represents a different state with its own behavior for button creation.</p>
 </span><span id="AppMediator-253"><a href="#AppMediator-253"><span class="linenos">253</span></a>                <span class="s2">&quot;Km to Mi&quot;</span><span class="p">:</span> <span class="n">KmToMilesStrategy</span><span class="p">(),</span>
 </span><span id="AppMediator-254"><a href="#AppMediator-254"><span class="linenos">254</span></a>                <span class="s2">&quot;C to F&quot;</span><span class="p">:</span> <span class="n">CelsiusToFahrenheitStrategy</span><span class="p">(),</span>
 </span><span id="AppMediator-255"><a href="#AppMediator-255"><span class="linenos">255</span></a>                <span class="s2">&quot;F to C&quot;</span><span class="p">:</span> <span class="n">FahrenheitToCelsiusStrategy</span><span class="p">(),</span>
-</span><span id="AppMediator-256"><a href="#AppMediator-256"><span class="linenos">256</span></a>                <span class="s2">&quot;In to Cm&quot;</span><span class="p">:</span> <span class="n">InchesToCentimeters</span><span class="p">(),</span>
-</span><span id="AppMediator-257"><a href="#AppMediator-257"><span class="linenos">257</span></a>                <span class="s2">&quot;Cm to In&quot;</span><span class="p">:</span> <span class="n">CentimetersToInches</span><span class="p">(),</span>
+</span><span id="AppMediator-256"><a href="#AppMediator-256"><span class="linenos">256</span></a>                <span class="s2">&quot;In to Cm&quot;</span><span class="p">:</span> <span class="n">InchesToCentimetersStrategy</span><span class="p">(),</span>
+</span><span id="AppMediator-257"><a href="#AppMediator-257"><span class="linenos">257</span></a>                <span class="s2">&quot;Cm to In&quot;</span><span class="p">:</span> <span class="n">CentimetersToInchesStrategy</span><span class="p">(),</span>
 </span><span id="AppMediator-258"><a href="#AppMediator-258"><span class="linenos">258</span></a>                <span class="s2">&quot;Min to Sec&quot;</span><span class="p">:</span> <span class="n">MinutesToSecondsStrategy</span><span class="p">(),</span>
 </span><span id="AppMediator-259"><a href="#AppMediator-259"><span class="linenos">259</span></a>                <span class="s2">&quot;Sec to Min&quot;</span><span class="p">:</span> <span class="n">SecondsToMinutesStrategy</span><span class="p">()</span>
 </span><span id="AppMediator-260"><a href="#AppMediator-260"><span class="linenos">260</span></a>            <span class="p">}</span>
 </span><span id="AppMediator-261"><a href="#AppMediator-261"><span class="linenos">261</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">conversion_context</span><span class="o">.</span><span class="n">set_strategy</span><span class="p">(</span><span class="n">strategy_map</span><span class="p">[</span><span class="n">operation</span><span class="p">])</span>
 </span><span id="AppMediator-262"><a href="#AppMediator-262"><span class="linenos">262</span></a>            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversion_context</span><span class="o">.</span><span class="n">execute_conversion</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span id="AppMediator-263"><a href="#AppMediator-263"><span class="linenos">263</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="AppMediator-263"><a href="#AppMediator-263"><span class="linenos">263</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </span><span id="AppMediator-264"><a href="#AppMediator-264"><span class="linenos">264</span></a>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 </span><span id="AppMediator-265"><a href="#AppMediator-265"><span class="linenos">265</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 </span></pre></div>
@@ -1922,14 +1914,14 @@ dependency between components.</p>
 </span><span id="AppMediator.handle_conversion-253"><a href="#AppMediator.handle_conversion-253"><span class="linenos">253</span></a>                <span class="s2">&quot;Km to Mi&quot;</span><span class="p">:</span> <span class="n">KmToMilesStrategy</span><span class="p">(),</span>
 </span><span id="AppMediator.handle_conversion-254"><a href="#AppMediator.handle_conversion-254"><span class="linenos">254</span></a>                <span class="s2">&quot;C to F&quot;</span><span class="p">:</span> <span class="n">CelsiusToFahrenheitStrategy</span><span class="p">(),</span>
 </span><span id="AppMediator.handle_conversion-255"><a href="#AppMediator.handle_conversion-255"><span class="linenos">255</span></a>                <span class="s2">&quot;F to C&quot;</span><span class="p">:</span> <span class="n">FahrenheitToCelsiusStrategy</span><span class="p">(),</span>
-</span><span id="AppMediator.handle_conversion-256"><a href="#AppMediator.handle_conversion-256"><span class="linenos">256</span></a>                <span class="s2">&quot;In to Cm&quot;</span><span class="p">:</span> <span class="n">InchesToCentimeters</span><span class="p">(),</span>
-</span><span id="AppMediator.handle_conversion-257"><a href="#AppMediator.handle_conversion-257"><span class="linenos">257</span></a>                <span class="s2">&quot;Cm to In&quot;</span><span class="p">:</span> <span class="n">CentimetersToInches</span><span class="p">(),</span>
+</span><span id="AppMediator.handle_conversion-256"><a href="#AppMediator.handle_conversion-256"><span class="linenos">256</span></a>                <span class="s2">&quot;In to Cm&quot;</span><span class="p">:</span> <span class="n">InchesToCentimetersStrategy</span><span class="p">(),</span>
+</span><span id="AppMediator.handle_conversion-257"><a href="#AppMediator.handle_conversion-257"><span class="linenos">257</span></a>                <span class="s2">&quot;Cm to In&quot;</span><span class="p">:</span> <span class="n">CentimetersToInchesStrategy</span><span class="p">(),</span>
 </span><span id="AppMediator.handle_conversion-258"><a href="#AppMediator.handle_conversion-258"><span class="linenos">258</span></a>                <span class="s2">&quot;Min to Sec&quot;</span><span class="p">:</span> <span class="n">MinutesToSecondsStrategy</span><span class="p">(),</span>
 </span><span id="AppMediator.handle_conversion-259"><a href="#AppMediator.handle_conversion-259"><span class="linenos">259</span></a>                <span class="s2">&quot;Sec to Min&quot;</span><span class="p">:</span> <span class="n">SecondsToMinutesStrategy</span><span class="p">()</span>
 </span><span id="AppMediator.handle_conversion-260"><a href="#AppMediator.handle_conversion-260"><span class="linenos">260</span></a>            <span class="p">}</span>
 </span><span id="AppMediator.handle_conversion-261"><a href="#AppMediator.handle_conversion-261"><span class="linenos">261</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">conversion_context</span><span class="o">.</span><span class="n">set_strategy</span><span class="p">(</span><span class="n">strategy_map</span><span class="p">[</span><span class="n">operation</span><span class="p">])</span>
 </span><span id="AppMediator.handle_conversion-262"><a href="#AppMediator.handle_conversion-262"><span class="linenos">262</span></a>            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversion_context</span><span class="o">.</span><span class="n">execute_conversion</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span id="AppMediator.handle_conversion-263"><a href="#AppMediator.handle_conversion-263"><span class="linenos">263</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="AppMediator.handle_conversion-263"><a href="#AppMediator.handle_conversion-263"><span class="linenos">263</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </span><span id="AppMediator.handle_conversion-264"><a href="#AppMediator.handle_conversion-264"><span class="linenos">264</span></a>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 </span><span id="AppMediator.handle_conversion-265"><a href="#AppMediator.handle_conversion-265"><span class="linenos">265</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update_display</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 </span></pre></div>
@@ -1998,7 +1990,7 @@ dependency between components.</p>
 </span><span id="Display-310"><a href="#Display-310"><span class="linenos">310</span></a>    <span class="k">def</span> <span class="nf">update_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="Display-311"><a href="#Display-311"><span class="linenos">311</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the display with a given value.&quot;&quot;&quot;</span>
 </span><span id="Display-312"><a href="#Display-312"><span class="linenos">312</span></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-</span><span id="Display-313"><a href="#Display-313"><span class="linenos">313</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Change the .2f here</span>
+</span><span id="Display-313"><a href="#Display-313"><span class="linenos">313</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="Display-314"><a href="#Display-314"><span class="linenos">314</span></a>        <span class="k">else</span><span class="p">:</span>
 </span><span id="Display-315"><a href="#Display-315"><span class="linenos">315</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 </span></pre></div>
@@ -2150,7 +2142,7 @@ dependency between components.</p>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Display.update_display-310"><a href="#Display.update_display-310"><span class="linenos">310</span></a>    <span class="k">def</span> <span class="nf">update_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="Display.update_display-311"><a href="#Display.update_display-311"><span class="linenos">311</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the display with a given value.&quot;&quot;&quot;</span>
 </span><span id="Display.update_display-312"><a href="#Display.update_display-312"><span class="linenos">312</span></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-</span><span id="Display.update_display-313"><a href="#Display.update_display-313"><span class="linenos">313</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Change the .2f here</span>
+</span><span id="Display.update_display-313"><a href="#Display.update_display-313"><span class="linenos">313</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="Display.update_display-314"><a href="#Display.update_display-314"><span class="linenos">314</span></a>        <span class="k">else</span><span class="p">:</span>
 </span><span id="Display.update_display-315"><a href="#Display.update_display-315"><span class="linenos">315</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 </span></pre></div>

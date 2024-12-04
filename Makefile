@@ -4,7 +4,11 @@ DOCS = docs
 UML_DIR = uml
 
 .PHONY: all
-all: check-style check-type test create-docs clean
+all: check-style check-type test run-test-coverage create-docs clean
+
+.PHONY: run
+run:
+	@python3 main.py
 
 .PHONY: check-style
 check-style:

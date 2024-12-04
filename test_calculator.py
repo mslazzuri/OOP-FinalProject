@@ -252,12 +252,19 @@ class TestDisplay(unittest.TestCase):
     @given(st.floats(allow_infinity=False, allow_nan=False))
     def test_update_display_with_float(self, value):
         self.display.update_display(value)
-        self.assertEqual(self.display.equation.get(), f"{value:.3f}")
+        if isinstance(value, float):
+            if value.is_integer():
+                exp_val = str(int(value))
+            else:
+                exp_val = f"{value:.3f}"
+        else:
+            exp_val = str(value)
+        self.assertEqual(self.display.equation.get(), exp_val)
 
     @given(st.integers())
     def test_update_display_with_int(self, value):
         self.display.update_display(value)
-        self.assertEqual(self.display.equation.get(), f"{value:.3f}")
+        self.assertEqual(self.display.equation.get(), str(int(value)))
 
     @given(st.text())
     def test_update_display_with_str(self, value):
@@ -269,7 +276,7 @@ class TestDisplay(unittest.TestCase):
         self.assertEqual(self.display.equation.get(), "")
         
         self.display.update_display(0)  # Zero
-        self.assertEqual(self.display.equation.get(), "0.000")
+        self.assertEqual(self.display.equation.get(), "0")
 
 
 class TestButtonManager(unittest.TestCase):

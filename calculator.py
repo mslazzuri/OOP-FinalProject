@@ -306,10 +306,15 @@ class Display:
             command=self.mediator.set_convert_mode, relief='flat'
         ).place(x=275)
 
-    def update_display(self, value: Union[str, float]) -> None:
+    def update_display(self, value: Union[str, int, float]) -> None:
         """Update the display with a given value."""
-        if isinstance(value, (float, int)):
-            self.equation.set(f"{value:.3f}")
+        if isinstance(value, int):
+            self.equation.set(str(value))
+        elif isinstance(value, float):
+            if value.is_integer():
+                self.equation.set(str(int(value)))
+            else:
+                self.equation.set(f"{value:.3f}")
         else:
             self.equation.set(str(value))
 
@@ -363,5 +368,3 @@ class ButtonManager:
             bd=0, highlightbackground='#484F2B', highlightcolor='#7A8450',
             command=handle_conversion
         ).grid(column=col, row=row, padx=4, pady=4)
-
-
