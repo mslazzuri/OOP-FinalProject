@@ -368,3 +368,12 @@ class ButtonManager:
             activeforeground='white', bd=0, highlightbackground='white',
             highlightcolor='#7A8450', command=handle_conversion
         ).grid(column=col, row=row, padx=4, pady=4)
+
+
+# ------------------ Main Application ------------------
+
+
+if __name__ == "__main__":
+    root = Tk()
+    mediator = AppMediator(root)
+    root.mainloop()

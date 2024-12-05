@@ -8,7 +8,7 @@ all: check-style check-type test run-test-coverage create-docs clean
 
 .PHONY: run
 run:
-	@python3 main.py
+	@python3 calculator.py
 
 .PHONY: check-style
 check-style:
